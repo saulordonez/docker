@@ -1,5 +1,5 @@
 FROM debian:buster-slim
-MAINTAINER Odoo S.A. <info@odoo.com>
+LABEL MAINTAINER="Saul O <isoatec@gmail.com>"
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
@@ -55,8 +55,9 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 ENV ODOO_VERSION 14.0
-ARG ODOO_RELEASE=20210111
-ARG ODOO_SHA=dc97e990bfabf167159a16fbf7437f7490bab46b
+#esta informacion la busco en https://nightly.odoo.com/14.0/nightly/deb/ en [la fecha de hoy].amd64.changes
+ARG ODOO_RELEASE=20210113
+ARG ODOO_SHA=7aa9651e5b984b0b3dbcdbcb23bcdedad96db52a
 RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
     && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
